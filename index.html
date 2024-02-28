@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Apply some basic styling */
+    select {
+      width: 200px;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    /* Style the selected options */
+    select option:checked {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    /* Style the search input */
+    input[type="text"] {
+      width: 200px;
+      padding: 5px;
+      margin-top: 10px;
+    }
+  </style>
+  <title>Customized Multiple Select with Search</title>
+</head>
+<body>
+
+  <!-- Create a search input and a multiple select with an ID for customization -->
+  <input type="text" id="searchInput" placeholder="Search...">
+  <select id="customSelect" multiple>
+    <option value="option1">Option 1</option>
+    <option value="option2">Option 2</option>
+    <option value="option3">Option 3</option>
+    <option value="option4">Option 4</option>
+    <!-- Add more options as needed -->
+  </select>
+
+  <script>
+    // Add event listeners or additional customization using JavaScript
+    const searchInput = document.getElementById('searchInput');
+    const customSelect = document.getElementById('customSelect');
+    const allOptions = Array.from(customSelect.options);
+
+    // Add an event listener to the search input
+    searchInput.addEventListener('input', function() {
+      const searchTerm = this.value.toLowerCase();
+      const filteredOptions = allOptions.filter(option =>
+        option.text.toLowerCase().includes(searchTerm)
+      );
+
+      // Clear the select and add the filtered options
+      customSelect.innerHTML = '';
+      filteredOptions.forEach(option => customSelect.add(option));
+    });
+
+    // Example: Add an event listener to alert the selected options
+    customSelect.addEventListener('change', function() {
+      const selectedOptions = Array.from(this.selectedOptions).map(option => option.value);
+      alert(`Selected Options: ${selectedOptions.join(', ')}`);
+    });
+  </script>
+
+</body>
+</html>
