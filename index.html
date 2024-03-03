@@ -3,51 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/css/select2.min.css" rel="stylesheet" />
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/js/select2.min.js"></script>
-  <style>
-    .select2-container--default .select2-selection--multiple .select2-selection__choice {
-      background-color: #4CAF50;
-      color: white;
-      border: 1px solid #4CAF50;
-    }
-
-    .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
-      color: white;
-    }
-  </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
 </head>
 <body>
 
-  <select id="mySelect" multiple="multiple">
-    <option value="option1" seelected>Option 111</option>
+  <select id="mySelect" multiple>
+    <option value="option1">Option 1</option>
     <option value="option2">Option 2</option>
     <option value="option3">Option 3</option>
     <!-- Add more options as needed -->
   </select>
 
+  <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
   <script>
-    $(document).ready(function() {
-      $('#mySelect').select2({
-        placeholder: 'Select options',
-        allowClear: true,
-        tags: true,
-        tokenSeparators: [',', ' '],
-        closeOnSelect: false,
-        templateResult: function(data) {
-          if (data.element) {
-            $(data.element).attr('selected', 'selected');
-            return data.text;
-          }
-          return data.text;
-        }
-      });
-
-      $('#mySelect').on('select2:unselect', function(e) {
-        var data = e.params.data;
-        var option = $(e.params.originalEvent.target).find("option[value='" + data.id + "']");
-        option.remove();
+    document.addEventListener('DOMContentLoaded', function () {
+      var select = new Choices('#mySelect', {
+        removeItemButton: true,
+        searchEnabled: true,
       });
     });
   </script>
